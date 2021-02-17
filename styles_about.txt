@@ -1,0 +1,5 @@
+main colors:
+
+#FE6737  -  active sections, active nav
+#211F41  -  nav background
+#3F3E60  -  background, nav icons font color & outline, active section + box-shadow
