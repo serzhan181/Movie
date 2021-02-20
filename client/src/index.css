@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .container {
+    @apply py-7 px-4;
+  }
+
+  .main-content {
+    @apply pl-20 w-full;
+  }
+
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
+  .card {
+    @apply flex w-60 h-96 overflow-hidden rounded-3xl bg-secondary border-2 border-primary-light cursor-pointer relative;
+  }
+
+  .onHoverExploreBtn {
+    @apply absolute w-16 h-16 invisible rounded-full left-1/2 transform bottom-1/2 bg-primary-light flex-center -translate-x-48;
+  }
+
+  .btn {
+    @apply rounded-full select-none transition-all duration-300 ease-out focus:outline-none bg-primary-light;
+  }
+}
+
+/* Had to do this cuz tailwind does not support calc which i need */
+
+.blurry {
+  backdrop-filter: blur(5px);
+}
+
+.card:hover > .onHoverExploreBtn {
+  visibility: visible;
+  transform: translateX(-50%);
+}
