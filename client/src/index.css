@@ -4,11 +4,11 @@
 
 @layer components {
   .container {
-    @apply py-7 px-4;
+    @apply py-10 px-8;
   }
 
   .main-content {
-    @apply pl-20 w-full;
+    @apply sm:pl-0 md:pl-20 w-full;
   }
 
   .flex-center {
@@ -24,11 +24,31 @@
   }
 
   .btn {
-    @apply rounded-full select-none transition-all duration-300 ease-out focus:outline-none bg-primary-light;
+    @apply rounded-full select-none transition-all duration-300 ease-out focus:outline-none bg-primary-light text-center;
+  }
+
+  .mini-card {
+    @apply w-80 rounded overflow-hidden cursor-pointer relative;
+  }
+
+  .mini-card-onhover {
+    @apply absolute inset-0 bg-black flex-center;
   }
 }
 
 /* Had to do this cuz tailwind does not support calc which i need */
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(56, 58, 60);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(24, 22, 22);
+}
 
 .blurry {
   backdrop-filter: blur(5px);

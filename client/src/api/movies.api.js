@@ -10,6 +10,10 @@ const instance = axios.create({
   },
 })
 
-export const imageBaseUrl = 'https://image.tmdb.org/t/p/original/'
+export const imgtypes = {
+  xl: 'https://image.tmdb.org/t/p/original',
+  md: 'https://image.tmdb.org/t/p/w300',
+  sm: 'https://image.tmdb.org/t/p/w200',
+}
 
 export const getMovieAPI = (id) => instance.get(`/movie/${id}`)
