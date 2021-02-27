@@ -16,11 +16,15 @@
   }
 
   .card {
-    @apply flex w-60 h-96 overflow-hidden rounded-3xl bg-secondary border-2 border-primary-light cursor-pointer relative;
+    @apply flex sm:w-full sm:h-24 md:w-60 md:h-96 overflow-hidden rounded-3xl bg-secondary border-2 border-primary-light cursor-pointer relative;
+  }
+
+  .card__description {
+    @apply flex flex-col bg-secondary md:bg-opacity-90 md:bottom-0 sm:h-full md:h-auto w-full text-center py-4 px-2 blurry md:absolute;
   }
 
   .onHoverExploreBtn {
-    @apply absolute w-16 h-16 invisible rounded-full left-1/2 transform bottom-1/2 bg-primary-light flex-center -translate-x-48;
+    @apply sm:hidden md:flex md:justify-center md:items-center absolute w-16 h-16 invisible rounded-full left-1/2 transform bottom-1/2 bg-primary-light flex-center -translate-x-48;
   }
 
   .btn {
@@ -28,7 +32,7 @@
   }
 
   .mini-card {
-    @apply w-80 rounded overflow-hidden cursor-pointer relative;
+    @apply w-80 h-44 rounded overflow-hidden cursor-pointer relative;
   }
 
   .mini-card-onhover {

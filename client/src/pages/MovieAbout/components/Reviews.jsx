@@ -13,7 +13,7 @@ const arr = [
 ]
 export const Reviews = () => {
   return (
-    <section className='mt-4 overflow-x-scroll'>
+    <section className='mt-4 overflow-auto text-gray-200'>
       {arr.map((c) => (
         <Comment key={c.id} />
       ))}

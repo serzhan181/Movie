@@ -7,9 +7,10 @@ export const Modal = ({ children }) => {
   const el = document.createElement('div')
   useEffect(() => {
     modalRoot.appendChild(el)
-
+    document.body.style.overflow = 'hidden'
     return () => {
       modalRoot.removeChild(el)
+      document.body.style.overflow = 'auto'
     }
   }, [el])
 

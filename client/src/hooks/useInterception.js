@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 /*
   valid options = {
     rootMargin: '160px',
-    threshold: 0.9
+    threshold: 0.9g
   }
 */
 
