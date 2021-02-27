@@ -1,4 +1,4 @@
-import { useInterception } from '../../../hooks/useInterception'
+import { useInterception } from '../../../../hooks/useInterception'
 
 export const Left = ({
   vote_average,

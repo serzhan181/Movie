@@ -6,16 +6,16 @@ export const Detailed = ({ curMovie, diffDate }) => {
     <div className='w-full sm:block lg:flex lg:justify-between lg:items-center flex-wrap'>
       <Left
         {...{
-          budget: curMovie.budget,
+          budget: curMovie?.budget,
           diffDate,
-          release_date: curMovie.release_date,
-          revenue: curMovie.revenue,
-          vote_average: curMovie.vote_average,
+          release_date: curMovie?.release_date,
+          revenue: curMovie?.revenue,
+          vote_average: curMovie?.vote_average,
         }}
       />
-      <Right {...{ overview: curMovie.overview, tagline: curMovie.tagline }} />
+      <Right
+        {...{ overview: curMovie?.overview, tagline: curMovie?.tagline }}
+      />
     </div>
   )
 }
-
-// hsla(0, 100%, 50%, 1)

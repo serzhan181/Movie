@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom'
 import { Modal } from './Modal'
 
-export const Dialog = ({ children, open, className }) => {
+export const Dialog = ({ children, open, className, centered = false }) => {
   const history = useHistory()
 
   const handleClose = (e) => {
@@ -14,7 +14,9 @@ export const Dialog = ({ children, open, className }) => {
     <Modal>
       <div
         onClick={handleClose}
-        className='fixed flex justify-center inset-0 bg-black bg-opacity-70'
+        className={`fixed flex justify-center inset-0 bg-black bg-opacity-70 ${
+          centered && 'items-center'
+        }`}
         data-overlay={true}
       >
         <div className={className}>{children}</div>
