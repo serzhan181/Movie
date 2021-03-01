@@ -40,13 +40,15 @@ export const Introduction = ({ curMovie }) => {
         </Link>
         <Trailer ytId={curMovie?.ytId?.key} />
 
-        <a
-          className='btn p-3 focus:bg-secondary hover:bg-primary w-full'
-          href={curMovie?.homepage}
-          target='__blank'
-        >
-          HOMEPAGE
-        </a>
+        {curMovie.homepage && (
+          <a
+            className='btn p-3 focus:bg-secondary hover:bg-primary w-full'
+            href={curMovie?.homepage}
+            target='__blank'
+          >
+            HOMEPAGE
+          </a>
+        )}
       </div>
     </div>
   )

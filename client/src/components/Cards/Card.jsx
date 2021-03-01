@@ -9,7 +9,7 @@ export const Card = ({ movie }) => {
         <i className='icons ion-ios-arrow-forward text-4xl'></i>
       </div>
       <img
-        className='h-full sm:w-2/12 md:w-full object-cover object-top'
+        className='h-full w-2/12 md:w-full object-cover object-top'
         src={`${imgtypes.md}${movie.poster_path}`}
         alt={movie.title}
       />
