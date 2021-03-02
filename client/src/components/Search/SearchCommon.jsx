@@ -5,6 +5,7 @@ export const SearchCommon = ({ onSubmit, register }) => {
       onSubmit={onSubmit}
     >
       <input
+        placeholder='Search for movies...'
         className='bg-secondary outline-none rounded-full text-sm px-2 w-10/12'
         type='text'
         name='query'

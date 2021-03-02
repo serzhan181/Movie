@@ -28,6 +28,7 @@ module.exports = {
       height: {
         30: '8rem',
         104: '32rem',
+        '80-screen': '80vh',
       },
 
       boxShadow: {

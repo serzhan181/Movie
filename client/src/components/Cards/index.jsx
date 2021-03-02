@@ -1,11 +1,7 @@
-import { Card } from './Card'
+import { CardsCommon } from './CardsCommon'
+import { useHistory } from 'react-router-dom'
 
 export const Cards = ({ movieList }) => {
-  return (
-    <section className='grid sm:w-full w-max mt-4 md:grid-cols-3 lg:grid-cols-5 gap-2'>
-      {movieList.results?.map((movie) => (
-        <Card key={movie.id} movie={movie} />
-      ))}
-    </section>
-  )
+  const history = useHistory()
+  return <CardsCommon {...{ history, movieList }} />
 }

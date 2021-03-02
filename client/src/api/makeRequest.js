@@ -10,9 +10,10 @@ const instance = axios.create({
   },
 })
 
-export const request = (url, method) => {
+export const request = (url, method = 'GET', params = {}) => {
   return instance({
     url,
     method,
+    params,
   })
 }
