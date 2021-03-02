@@ -4,11 +4,11 @@
 
 @layer components {
   .container {
-    @apply py-10 px-8;
+    @apply py-6 px-4 lg:py-10 lg:px-6 w-full;
   }
 
   .main-content {
-    @apply sm:pl-0 md:pl-20 w-full;
+    @apply pl-0 md:pl-20;
   }
 
   .flex-center {
@@ -16,15 +16,15 @@
   }
 
   .card {
-    @apply flex sm:w-full sm:h-24 md:w-60 md:h-96 overflow-hidden rounded-3xl bg-secondary border-2 border-primary-light cursor-pointer relative;
+    @apply flex w-full h-24 md:w-52 md:h-72 lg:w-56 lg:h-80 xl:w-60 xl:h-96 overflow-hidden rounded-3xl bg-secondary border-2 border-primary-light cursor-pointer relative;
   }
 
   .card__description {
-    @apply flex flex-col bg-secondary md:bg-opacity-90 md:bottom-0 sm:h-full md:h-auto w-full text-center py-4 px-2 blurry md:absolute;
+    @apply flex flex-col bg-secondary md:bg-opacity-90 md:bottom-0 h-full md:h-auto w-full text-center py-4 px-2 blurry md:absolute;
   }
 
   .onHoverExploreBtn {
-    @apply sm:hidden md:flex md:justify-center md:items-center absolute w-16 h-16 invisible rounded-full left-1/2 transform bottom-1/2 bg-primary-light flex-center -translate-x-48;
+    @apply hidden md:flex md:justify-center md:items-center absolute w-16 h-16 invisible rounded-full left-1/2 transform bottom-1/2 bg-primary-light flex-center -translate-x-48;
   }
 
   .btn {

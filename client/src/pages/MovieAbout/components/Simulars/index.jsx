@@ -7,7 +7,7 @@ export const Simulars = ({ simulars }) => {
 
       <section className='w-full flex overflow-auto'>
         <ul className='flex gap-2 m-3'>
-          {simulars ? (
+          {simulars?.length ? (
             simulars.map((s) => (
               <SimularItem
                 key={s.id}

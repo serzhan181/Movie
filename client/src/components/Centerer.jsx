@@ -1,3 +1,3 @@
-export const Centerer = ({ children }) => (
-  <div className='w-full h-screen flex-center'>{children}</div>
+export const Centerer = ({ children, height }) => (
+  <div className={`w-full ${height} flex-center`}>{children}</div>
 )
