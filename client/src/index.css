@@ -16,7 +16,7 @@
   }
 
   .card {
-    @apply flex w-full h-24 md:w-52 md:h-72 lg:w-56 lg:h-80 xl:w-60 xl:h-96 overflow-hidden rounded-3xl bg-secondary border-2 border-primary-light cursor-pointer relative;
+    @apply flex w-full h-24 lg:w-56 lg:h-80 xl:w-60 xl:h-96 overflow-hidden rounded-3xl bg-secondary border-2 border-primary-light cursor-pointer relative;
   }
 
   .card__description {

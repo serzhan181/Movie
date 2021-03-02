@@ -11,6 +11,7 @@ export const App = () => {
       <main className='main-content'>
         <Switch>
           <Route path='/movie/:id' component={MovieAbout} />
+          <Route path='/about' render={() => <div>this is about page</div>} />
           <Route path='/' component={Home} />
         </Switch>
       </main>

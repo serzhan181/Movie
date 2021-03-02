@@ -7,7 +7,7 @@ import { Loader } from '../../components/Loader'
 export const HomeCommon = ({ movieList, isLoading }) => {
   return (
     <main className='container'>
-      <div className='flex justify-between'>
+      <div className='flex flex-col md:justify-between md:flex-row'>
         <h1 className='font-bold text-4xl cursor-default'>Dashboard</h1>
         <Search />
       </div>

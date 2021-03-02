@@ -1,7 +1,7 @@
 export const SearchCommon = ({ onSubmit, register }) => {
   return (
     <form
-      className='p-2 bg-primary-light rounded-full w-96 flex justify-around'
+      className='mt-3 md:mt-0 p-2 bg-primary-light rounded-full w-96 flex justify-around'
       onSubmit={onSubmit}
     >
       <input

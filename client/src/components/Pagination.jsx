@@ -11,6 +11,11 @@ export const Pagination = observer(() => {
           +movie.movieList?.page < 2 &&
           'bg-transparent text-secondary cursor-not-allowed'
         }`}
+        onClick={() => {
+          if (+movie.movieList?.page > 1) {
+            history.push(`/?page=${movie.movieList?.page - 1}`)
+          }
+        }}
       >
         Previous page
       </button>
@@ -23,7 +28,9 @@ export const Pagination = observer(() => {
           'bg-transparent text-secondary cursor-not-allowed'
         }`}
         onClick={() => {
-          history.push(`/?page=${movie.movieList?.page + 1}`)
+          if (0 < +movie.movieList?.page < movie.movieList?.total_pages) {
+            history.push(`/?page=${movie.movieList?.page + 1}`)
+          }
         }}
       >
         Next page

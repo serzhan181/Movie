@@ -57,6 +57,17 @@ class Movie {
       }
     }, this.setLoading)
   }
+
+  getMovie = async (query) => {
+    requestAndToggle(async () => {
+      try {
+        const res = await moviesAPI.getMovie(query)
+        runInAction(() => (this.movieList = res.data))
+      } catch (err) {
+        console.warn(err)
+      }
+    }, this.setLoading)
+  }
 }
 
 export const movie = new Movie()

@@ -18,9 +18,14 @@ const getYoutubeTrailer = (id) => {
   return request(`/movie/${id}/videos`)
 }
 
+const getMovie = (query) => {
+  return request(`/search/movie?language=en-US&query=${query}`)
+}
+
 export const moviesAPI = {
   getPopularMovies,
   getSingleMovie,
   getSimularMovies,
   getYoutubeTrailer,
+  getMovie,
 }
