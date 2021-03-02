@@ -1,7 +1,9 @@
 import { request } from '../makeRequest'
 
-const getPopularMovies = () => {
-  return request(`/movie/popular?language=en-US&page=1`, 'GET')
+const getPopularMovies = (page) => {
+  return request(`/movie/popular?language=en-US`, 'GET', {
+    page,
+  })
 }
 
 const getSingleMovie = (id) => {

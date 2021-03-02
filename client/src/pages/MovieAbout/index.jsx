@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
-import loader from '../../assets/icons/loader.svg'
-import { Centerer } from '../../components/Centerer'
+import { Loader } from '../../components/Loader'
 import { useParams } from 'react-router-dom'
 import { scrollToTop } from '../../helpers/scrollToTop'
 import { movie } from '../../stores/movie.state'
 import { Detailed, Introduction, Simulars } from './components'
 import { useDiffDate } from '../../hooks/useDiffDate'
+import { APP_NAME } from '../../utils/constants'
 
 export const MovieAbout = observer(() => {
   const { id } = useParams()
@@ -16,6 +16,10 @@ export const MovieAbout = observer(() => {
       await movie.getSingleMovie(id)
       document.title = movie.curMovie?.title
     })()
+
+    return () => {
+      document.title = APP_NAME
+    }
   }, [id])
   const diffDate = useDiffDate(movie.curMovie?.release_date)
 
@@ -28,8 +32,6 @@ export const MovieAbout = observer(() => {
       </div>
     </>
   ) : (
-    <Centerer>
-      <img src={loader} alt='loading' />
-    </Centerer>
+    <Loader height='h-screen' />
   )
 })

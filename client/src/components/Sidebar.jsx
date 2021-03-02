@@ -8,7 +8,7 @@ const sidebarItems = [
 
 export const Sidebar = () => {
   return (
-    <aside className='sm:hidden md:block bg-secondary fixed left-0 top-0 h-full w-20 mr-20'>
+    <aside className='hidden md:block bg-secondary fixed left-0 top-0 h-full w-20 mr-20'>
       <div className='flex items-center flex-col'>
         <img className='w-10 mt-5' src={logo} alt='logo' />
         <ul className='mt-5'>
