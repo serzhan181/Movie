@@ -1,6 +1,5 @@
 import { Switch, Route } from 'react-router-dom'
-import { Home } from './pages/Home'
-import { MovieAbout } from './pages/MovieAbout'
+import { Discover, Home, MovieAbout } from './pages'
 import { Sidebar } from './components/Sidebar'
 
 export const App = () => {
@@ -11,7 +10,7 @@ export const App = () => {
       <main className='main-content'>
         <Switch>
           <Route path='/movie/:id' component={MovieAbout} />
-          <Route path='/about' render={() => <div>this is about page</div>} />
+          <Route path='/discover' component={Discover} />
           <Route path='/' component={Home} />
         </Switch>
       </main>

@@ -12,14 +12,16 @@ export const HomeCommon = ({ movieList, isLoading }) => {
         <Search />
       </div>
 
-      {!isLoading ? (
-        <div>
-          <Categories />
+      <Categories isLoading={isLoading} />
 
+      {!isLoading ? (
+        <>
           <Cards movieList={movieList} />
 
-          <Pagination />
-        </div>
+          <Pagination
+            {...{ page: movieList?.page, totalPages: movieList?.total_pages }}
+          />
+        </>
       ) : (
         <Loader height='h-80-screen' />
       )}

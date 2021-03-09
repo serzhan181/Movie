@@ -11,9 +11,6 @@ class Movie {
   }
 
   movieList = {}
-  setCurrentPage = (page) => {
-    this.movieList.page = page
-  }
 
   constructor() {
     makeAutoObservable(this)
@@ -31,13 +28,6 @@ class Movie {
         console.warn(err)
       }
     }, this.setLoading)
-  }
-
-  getPage = (page) => {
-    if (page < this.movieList.total_pages && page > 1) {
-      this.getPopularMovies(page)
-      return
-    }
   }
 
   getSingleMovie = async (id) => {
@@ -58,11 +48,28 @@ class Movie {
     }, this.setLoading)
   }
 
-  getMovie = async (query) => {
+  getMovie = async (query, page = 1) => {
     requestAndToggle(async () => {
       try {
-        const res = await moviesAPI.getMovie(query)
-        runInAction(() => (this.movieList = res.data))
+        const res = await moviesAPI.getMovie(query, page)
+
+        runInAction(() => {
+          this.movieList = res.data
+        })
+      } catch (err) {
+        console.warn(err)
+      }
+    }, this.setLoading)
+  }
+
+  getMovieByCategory = async (genreId, page = 1) => {
+    requestAndToggle(async () => {
+      try {
+        const res = await moviesAPI.getMovieByCategory(genreId, page)
+
+        runInAction(() => {
+          this.movieList = res.data
+        })
       } catch (err) {
         console.warn(err)
       }

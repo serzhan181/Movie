@@ -8,28 +8,14 @@ import { useQuery } from '../../hooks/useQuery'
 export const Home = observer(() => {
   const query = useQuery()
 
-  /*
-    This will get/set pagination
-  */
-
   useEffect(() => {
+    if (query.get('genre')) {
+      movie.getMovieByCategory(query.get('genre'), query.get('page') || 1)
+      return
+    }
+
     movie.getPopularMovies(query.get('page') || 1)
-
-    if (Boolean(query.get('page'))) {
-      movie.setCurrentPage(query.get('page'))
-      movie.getPage(query.get('page'))
-    }
-  }, [query.get('page')])
-
-  /*
-    This will get search queries if there is
-  */
-
-  useEffect(() => {
-    if (query.get('search')) {
-      movie.getMovie(query.get('search'))
-    }
-  }, [query.get('search')])
+  }, [query.get('page'), query.get('genre')])
 
   return (
     <HomeCommon

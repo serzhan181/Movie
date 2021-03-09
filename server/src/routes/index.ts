@@ -1,0 +1,1 @@
+export {route as authRouter} from './auth.route'

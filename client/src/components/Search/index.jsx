@@ -1,15 +1,16 @@
-import { useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { useHistory } from 'react-router-dom'
 import { SearchCommon } from './SearchCommon'
 
 export const Search = () => {
-  const history = useHistory()
   const { register, handleSubmit } = useForm()
+  const history = useHistory()
 
   const onSubmit = handleSubmit(({ query }) => {
     if (query) {
-      history.push(`/?search=${query}`)
+      history.push(`/discover?query=${query}`)
     }
   })
+
   return <SearchCommon {...{ onSubmit, register }} />
 }
