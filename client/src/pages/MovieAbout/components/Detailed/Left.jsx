@@ -22,15 +22,14 @@ export const Left = ({
       </div>
 
       <span>Vote average</span>
-      <div className='mt-2 relative sm:w-60 h-8 lg:w-96 lg:h-12 overflow-hidden rounded-3xl border border-solid bg-gray-800'>
-        <span className='absolute top-2 left-3 text-gray-300'>
-          {vote_average} / 10
-        </span>
-        <span
+      <div class='w-60 lg:w-96 h-4 bg-gray-800 rounded-full mt-3'>
+        <div
           ref={setRef}
           style={{ width: `${visible ? vote_average * 10 : 0}%` }}
-          className=' block h-full bg-gradient-to-r transition-all duration-700 from-red-700 to-green-700'
-        ></span>
+          class='h-full bg-gradient-to-r transition-all duration-700 from-red-700 to-green-700 text-center text-xs text-white rounded-full'
+        >
+          {vote_average}
+        </div>
       </div>
 
       <div className='mt-6'>

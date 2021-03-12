@@ -4,7 +4,7 @@
 
 @layer components {
   .container {
-    @apply py-6 px-4 lg:py-10 lg:px-6 w-full;
+    @apply w-full py-6 px-4 lg:py-10 lg:px-6;
   }
 
   .main-content {
@@ -16,7 +16,7 @@
   }
 
   .card {
-    @apply flex w-full h-24 lg:w-56 lg:h-80 xl:w-60 xl:h-96 overflow-hidden rounded-3xl bg-secondary border-2 border-primary-light cursor-pointer relative;
+    @apply flex w-full h-24 lg:w-36 lg:h-56 xl:w-60 xl:h-96 overflow-hidden rounded-3xl bg-secondary border-2 border-primary-light cursor-pointer relative;
   }
 
   .card__description {

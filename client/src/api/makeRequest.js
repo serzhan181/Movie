@@ -1,7 +1,7 @@
-import axios from 'axios'
 import { config } from './config'
+import axios from 'axios'
 
-const instance = axios.create({
+const instanceTMDB = axios.create({
   baseURL: 'https://api.themoviedb.org/3',
   headers: {
     Authorization: `Bearer ${config.THEMOVIEDB_TOKEN}`,
@@ -10,10 +10,15 @@ const instance = axios.create({
   },
 })
 
-export const request = (url, method = 'GET', params = {}) => {
-  return instance({
+export const requestTMDB = (url, method = 'GET', params = {}, headers = {}) => {
+  return instanceTMDB({
     url,
     method,
     params,
+    headers,
   })
+}
+
+export const request = (url, method = 'GET', params = {}) => {
+  return axios({ url, method, params })
 }

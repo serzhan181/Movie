@@ -6,7 +6,6 @@ import { scrollToTop } from '../../helpers/scrollToTop'
 import { movie } from '../../stores/movie.state'
 import { Detailed, Introduction, Simulars } from './components'
 import { useDiffDate } from '../../hooks/useDiffDate'
-import { APP_NAME } from '../../utils/constants'
 
 export const MovieAbout = observer(() => {
   const { id } = useParams()
@@ -14,12 +13,7 @@ export const MovieAbout = observer(() => {
     scrollToTop()
     ;(async function () {
       await movie.getSingleMovie(id)
-      document.title = movie.curMovie?.title
     })()
-
-    return () => {
-      document.title = APP_NAME
-    }
   }, [id])
   const diffDate = useDiffDate(movie.curMovie?.release_date)
 
