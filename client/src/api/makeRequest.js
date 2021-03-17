@@ -19,6 +19,10 @@ export const requestTMDB = (url, method = 'GET', params = {}, headers = {}) => {
   })
 }
 
-export const request = (url, method = 'GET', params = {}) => {
-  return axios({ url, method, params })
+export const request = ({ url, method = 'GET', params = {}, body }) => {
+  const cfg = { url, method, params }
+
+  if (method === 'POST') cfg.data = body
+
+  return axios(cfg)
 }

@@ -31,3 +31,4 @@ client/src/api/config.js
 
 server/.env
 server/yarn.lock
+server/src/migration

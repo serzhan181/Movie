@@ -1,11 +1,11 @@
-import type {ValidationError} from 'class-validator'
+import type { ValidationError } from 'class-validator'
 
 export const parseValidationErrors = (errors: ValidationError[]) => {
-    const res = {}
+  const res = {}
 
-    errors.forEach(field => {
-        res[field.property] = Object.values(field.constraints)
-    })
+  errors.forEach((field) => {
+    res[field.property] = Object.values(field.constraints)
+  })
 
-    return res
+  return res
 }

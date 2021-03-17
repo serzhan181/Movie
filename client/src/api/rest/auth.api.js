@@ -1,8 +1,11 @@
 import { request } from '../makeRequest'
 
 const register = (data) => {
-  console.log(data)
-  return request('localhost:5000/auth/register', 'POST', { ...data })
+  return request({
+    url: 'http://localhost:5000/auth/register',
+    method: 'POST',
+    body: data,
+  })
 }
 
 export const authAPI = {

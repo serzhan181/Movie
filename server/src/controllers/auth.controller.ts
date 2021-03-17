@@ -1,3 +1,4 @@
+import { handleError } from './../helpers/handleError'
 import { parseValidationErrors } from '../helpers/parseValidationErrors'
 import { validate } from 'class-validator'
 import { User } from './../entity/User'
@@ -5,7 +6,6 @@ import { Request, Response } from 'express'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import cookie from 'cookie'
-import { authMiddleware } from '../middlewares/auth.middleware'
 
 class AuthController {
   register = async (req: Request, res: Response) => {
@@ -33,7 +33,6 @@ class AuthController {
 
       return res.status(201).json(user)
     } catch (err) {
-      console.log(err)
       return res.status(400).json(err)
     }
   }
@@ -66,7 +65,7 @@ class AuthController {
 
       return res.json({ token })
     } catch (err) {
-      return res.status(500).json({ error: "Something's went wrong" })
+      return handleError(res)
     }
   }
 
@@ -74,7 +73,7 @@ class AuthController {
     return res.json(res.locals.user)
   }
 
-  logout = async (req: Request, res: Response) => {
+  logout = async (_: Request, res: Response) => {
     res.set(
       'Set-Cookie',
       cookie.serialize('token', '', {

@@ -1,53 +1,37 @@
-import { IsEmail, Length } from "class-validator";
-import {Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BaseEntity, Index, CreateDateColumn, UpdateDateColumn} from "typeorm";
-import {v4 as uuid} from 'uuid'
+import { Post } from './Post'
+import { IsEmail, Length } from 'class-validator'
+import { Entity, Column, BeforeInsert, Index, OneToMany } from 'typeorm'
 import bcrypt from 'bcrypt'
+import { Exclude } from 'class-transformer'
+import { BaseModel } from './BaseModel'
 
 @Entity('users')
-export class User extends BaseEntity {
+export class User extends BaseModel {
+  constructor(props: Partial<User>) {
+    super()
+    Object.assign(this, props)
+  }
 
-    constructor(props: Partial<User>) {
-        super()
-        Object.assign(this, props)
-    }
+  @Index()
+  @Column({ unique: true })
+  @Length(1, 255)
+  username: string
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Index()
+  @Column()
+  @IsEmail()
+  email: string
 
-    @Index()
-    @Column({unique: true})
-    @Length(1, 255)
-    username: string;
+  @Exclude()
+  @Column()
+  @Length(6, 255)
+  password: string
 
-    @Index()
-    @Column()
-    @IsEmail()
-    email: string;
+  @OneToMany(() => Post, (post) => post.user)
+  posts: Post[]
 
-    @Column()
-    @Length(6, 255)
-    password: string;
-
-    @Column({type: 'uuid'})
-    uuid: string
-
-    @CreateDateColumn()
-    createdAt: Date
-
-    @UpdateDateColumn()
-    updatedAt: Date
-
-    @BeforeInsert()
-    createUuid() {
-        this.uuid = uuid()
-    }
-
-    @BeforeInsert()
-    async hashPassword() {
-        this.password = await bcrypt.hash(this.password, +process.env.SALT_COUNT)
-    }
-
-    toJSON() {
-        return {...this, id: undefined, password: undefined}
-    }
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, +process.env.SALT_COUNT)
+  }
 }

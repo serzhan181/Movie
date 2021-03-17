@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react'
   }
 */
 
-export const useInterception = (options, once = true) => {
+export const useInterception = (options = { threshold: 0 }, once = true) => {
   const [ref, setRef] = useState(null)
   const [visible, setVisible] = useState(false)
 
