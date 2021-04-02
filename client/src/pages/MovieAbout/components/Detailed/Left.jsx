@@ -13,20 +13,18 @@ export const Left = ({
     <div className='lg:w-1/2 sm:w-full'>
       <div className='mb-6'>
         <span>
-          Released: {release_date}
+          Released: {diffDate.diff} {diffDate.type} ago
           {'  '}
         </span>
-        <span className='text-gray-500 text-sm'>
-          {diffDate.diff} {diffDate.type} ago
-        </span>
+        <span className='text-gray-500 text-sm'>({release_date})</span>
       </div>
 
       <span>Vote average</span>
-      <div class='w-60 lg:w-96 h-4 bg-gray-800 rounded-full mt-3'>
+      <div className='w-60 lg:w-96 h-4 bg-gray-800 rounded-full mt-3'>
         <div
           ref={setRef}
           style={{ width: `${visible ? vote_average * 10 : 0}%` }}
-          class='h-full bg-gradient-to-r transition-all duration-700 from-red-700 to-green-700 text-center text-xs text-white rounded-full'
+          className='h-full bg-gradient-to-r transition-all duration-700 from-red-700 to-green-700 text-center text-xs text-white rounded-full'
         >
           {vote_average}
         </div>

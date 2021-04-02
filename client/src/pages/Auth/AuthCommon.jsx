@@ -16,14 +16,13 @@ export const AuthCommon = ({ type, onSubmit }) => {
       yup.string().required('Email is required.').email('should be an email.'),
   })
 
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, setError } = useForm({
     resolver: yupResolver(schema),
   })
-
   return (
     <form
       className='w-full h-screen flex-center flex-col'
-      onSubmit={handleSubmit(onSubmit.bind(null, type))}
+      onSubmit={handleSubmit(onSubmit.bind(null, { type, setError }))}
       autoComplete='off'
     >
       <div className='flex-center flex-col'>
@@ -80,7 +79,11 @@ export const AuthCommon = ({ type, onSubmit }) => {
           />
         </div>
 
-        <button className='btn p-2 text-xl w-24 capitalize' type='submit'>
+        <button
+          disabled={Object.keys(errors).length > 0}
+          className='btn p-2 text-xl w-24 capitalize disabled:opacity-50'
+          type='submit'
+        >
           {type}
         </button>
       </div>

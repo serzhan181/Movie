@@ -47,7 +47,7 @@ class AuthController {
       if (!user || !passwordMatches) {
         return res
           .status(401)
-          .json({ error: "Username or password does'nt match" })
+          .json({ username: ['Username or password is incorrect.'] })
       }
 
       const token = jwt.sign({ username }, process.env.JWT_SECRET)

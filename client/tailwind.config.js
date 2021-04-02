@@ -37,7 +37,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      scale: ['hover'],
+    },
   },
   plugins: [],
 }

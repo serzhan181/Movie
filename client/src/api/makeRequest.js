@@ -20,7 +20,12 @@ export const requestTMDB = (url, method = 'GET', params = {}, headers = {}) => {
 }
 
 export const request = ({ url, method = 'GET', params = {}, body }) => {
-  const cfg = { url, method, params }
+  const cfg = {
+    url: 'http://localhost:5000' + url,
+    method,
+    params,
+    withCredentials: true,
+  }
 
   if (method === 'POST') cfg.data = body
 

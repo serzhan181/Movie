@@ -2,7 +2,15 @@ import { request } from '../makeRequest'
 
 const register = (data) => {
   return request({
-    url: 'http://localhost:5000/auth/register',
+    url: '/auth/register',
+    method: 'POST',
+    body: data,
+  })
+}
+
+const login = (data) => {
+  return request({
+    url: '/auth/login',
     method: 'POST',
     body: data,
   })
@@ -10,4 +18,5 @@ const register = (data) => {
 
 export const authAPI = {
   register,
+  login,
 }

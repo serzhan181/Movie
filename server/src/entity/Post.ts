@@ -1,3 +1,4 @@
+import { Comment } from './Comment'
 import { User } from './User'
 import {
   BeforeInsert,
@@ -6,6 +7,7 @@ import {
   Index,
   JoinColumn,
   ManyToOne,
+  OneToMany,
 } from 'typeorm'
 import { BaseModel } from './BaseModel'
 import { makeid } from '../helpers/makeId'
@@ -34,6 +36,9 @@ export class Post extends BaseModel {
   @ManyToOne(() => User, (user) => user.posts)
   @JoinColumn({ name: 'username', referencedColumnName: 'username' })
   user: User
+
+  @OneToMany(() => Comment, (comment) => comment.post)
+  comments: Comment[]
 
   @BeforeInsert()
   makeIdAndSlug() {
