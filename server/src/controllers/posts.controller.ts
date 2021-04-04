@@ -22,7 +22,7 @@ class PostsController {
   getPosts = async (_: Request, res: Response) => {
     try {
       const posts = await Post.find({
-        relations: ['user'],
+        relations: ['user', 'votes'],
         order: { createdAt: 'DESC' },
       })
 

@@ -20,6 +20,8 @@ export const Feed = observer(() => {
               title: p.title,
               identifier: p.identifier,
               slug: p.slug,
+              commentCount: p.commentCount,
+              voteScore: p.voteScore,
             }}
           />
         ))}

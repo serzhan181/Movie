@@ -1,3 +1,4 @@
+import { Vote } from './Vote'
 import { Comment } from './Comment'
 import { User } from './User'
 import {
@@ -12,6 +13,7 @@ import {
 import { BaseModel } from './BaseModel'
 import { makeid } from '../helpers/makeId'
 import { slugify } from '../helpers/slugify'
+import { Exclude, Expose } from 'class-transformer'
 
 @Entity('posts')
 export class Post extends BaseModel {
@@ -39,6 +41,25 @@ export class Post extends BaseModel {
 
   @OneToMany(() => Comment, (comment) => comment.post)
   comments: Comment[]
+
+  @Exclude()
+  @OneToMany(() => Vote, (vote) => vote.post)
+  votes: Vote[]
+
+  @Expose() get commentCount(): number {
+    console.log('COMMENtS', this.comments)
+    return this.comments?.length
+  }
+
+  @Expose() get voteScore(): number {
+    return this.votes?.reduce((acc, cur) => acc + +cur.value, 0)
+  }
+
+  protected userVote: number
+  setUserVote(user: User) {
+    const idx = this.votes?.findIndex((v) => v.username === user.username)
+    this.userVote = idx > -1 ? this.votes[idx].value : 0
+  }
 
   @BeforeInsert()
   makeIdAndSlug() {

@@ -1,3 +1,4 @@
+import { Vote } from './Vote'
 import { Post } from './Post'
 import { User } from './User'
 import {
@@ -7,9 +8,11 @@ import {
   Index,
   JoinColumn,
   ManyToOne,
+  OneToMany,
 } from 'typeorm'
 import { BaseModel } from './BaseModel'
 import { makeid } from '../helpers/makeId'
+import { Exclude } from 'class-transformer'
 
 @Entity('comments')
 export class Comment extends BaseModel {
@@ -34,6 +37,16 @@ export class Comment extends BaseModel {
 
   @ManyToOne(() => Post, (post) => post.comments, { nullable: false })
   post: Post
+
+  @Exclude()
+  @OneToMany(() => Vote, (vote) => vote.comment)
+  votes: Vote[]
+
+  protected userVote: number
+  setUserVote(user: User) {
+    const idx = this.votes?.findIndex((v) => v.username === user.username)
+    this.userVote = idx > -1 ? this.votes[idx].value : 0
+  }
 
   @BeforeInsert()
   makeIdAndSlug() {

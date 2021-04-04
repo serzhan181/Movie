@@ -1,3 +1,4 @@
+import { Vote } from './Vote'
 import { Post } from './Post'
 import { IsEmail, Length } from 'class-validator'
 import { Entity, Column, BeforeInsert, Index, OneToMany } from 'typeorm'
@@ -29,6 +30,9 @@ export class User extends BaseModel {
 
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[]
+
+  @OneToMany(() => Vote, (vote) => vote.user)
+  votes: Vote[]
 
   @BeforeInsert()
   async hashPassword() {
