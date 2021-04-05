@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import { Blog } from './components/Blog'
 import { posts } from '../../stores/posts.state'
+import { Loader } from '../../components/Loader'
 import { useEffect } from 'react'
 
 export const Feed = observer(() => {
@@ -8,9 +9,13 @@ export const Feed = observer(() => {
     posts.fetchPosts()
   }, [])
 
+  const vote = ({ identifier, slug, value }) => {
+    posts.vote({ identifier, slug, value })
+  }
+
   return (
-    <div className='flex-center flex-col gap-2 my-container'>
-      {!posts.isLoading &&
+    <div className='flex-center flex-col gap-4 my-container mb-4'>
+      {!posts.isLoading ? (
         posts.posts.map((p) => (
           <Blog
             key={p.uuid}
@@ -22,9 +27,15 @@ export const Feed = observer(() => {
               slug: p.slug,
               commentCount: p.commentCount,
               voteScore: p.voteScore,
+              createdAt: p.createdAt,
+              userVote: p?.userVote,
+              vote,
             }}
           />
-        ))}
+        ))
+      ) : (
+        <Loader height='h-screen' />
+      )}
     </div>
   )
 })

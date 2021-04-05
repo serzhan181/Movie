@@ -2,15 +2,19 @@ import { User } from './../entity/User'
 import { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 
-export const authMdl = async (
-  _: Request,
+export const userMdl = async (
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const user: User | undefined = res.locals.user
+    const { token } = req.cookies
+    if (!token) return next()
 
-    if (!user) throw new Error('Unauthenticated.')
+    const { username }: any = jwt.verify(token, process.env.JWT_SECRET)
+
+    const user = await User.findOne({ username })
+    res.locals.user = user
 
     return next()
   } catch (err) {

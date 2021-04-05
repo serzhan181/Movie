@@ -7,7 +7,6 @@ export const Detailed = ({ curMovie, diffDate }) => {
       <Left
         {...{
           budget: curMovie?.budget,
-          diffDate,
           release_date: curMovie?.release_date,
           revenue: curMovie?.revenue,
           vote_average: curMovie?.vote_average,

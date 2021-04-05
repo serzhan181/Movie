@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   Switch,
   Route,
@@ -6,17 +5,20 @@ import {
   Redirect,
   useHistory,
 } from 'react-router-dom'
+import { observer } from 'mobx-react-lite'
 import { AuthCommon } from './AuthCommon'
 import { auth } from '../../stores/auth.state'
 
-export const Auth = () => {
+export const Auth = observer(() => {
+  if (auth.user.authenticated) {
+    return <Redirect to='/' />
+  }
   const { path } = useRouteMatch()
   const history = useHistory()
 
   const onSubmit = async ({ type, setError }, data) => {
     if (type === 'login') {
       const errors = await auth.login(data)
-      console.log(errors)
       if (errors && Object.keys(errors)) {
         debugger
         Object.keys(errors).forEach((key) => {
@@ -33,7 +35,6 @@ export const Auth = () => {
 
     if (type === 'sign up') {
       const errors = await auth.register(data)
-      console.log(errors)
       if (errors && Object.keys(errors)) {
         Object.keys(errors).forEach((key) => {
           setError(key, {
@@ -69,4 +70,4 @@ export const Auth = () => {
       <Redirect to='/' />
     </Switch>
   )
-}
+})

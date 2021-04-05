@@ -39,6 +39,7 @@ export class Post extends BaseModel {
   @JoinColumn({ name: 'username', referencedColumnName: 'username' })
   user: User
 
+  @Exclude()
   @OneToMany(() => Comment, (comment) => comment.post)
   comments: Comment[]
 
@@ -47,7 +48,6 @@ export class Post extends BaseModel {
   votes: Vote[]
 
   @Expose() get commentCount(): number {
-    console.log('COMMENtS', this.comments)
     return this.comments?.length
   }
 

@@ -16,7 +16,21 @@ const login = (data) => {
   })
 }
 
+const me = () => {
+  return request({
+    url: '/auth/me',
+  })
+}
+
+const logout = () => {
+  return request({
+    url: '/auth/logout',
+  })
+}
+
 export const authAPI = {
   register,
   login,
+  logout,
+  me,
 }

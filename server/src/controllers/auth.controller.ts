@@ -63,14 +63,14 @@ class AuthController {
         })
       )
 
-      return res.json({ token })
+      return res.json({ success: true, user })
     } catch (err) {
       return handleError(res)
     }
   }
 
   me = (_: Request, res: Response) => {
-    return res.json(res.locals.user)
+    return res.json({ success: true, user: res.locals.user })
   }
 
   logout = async (_: Request, res: Response) => {

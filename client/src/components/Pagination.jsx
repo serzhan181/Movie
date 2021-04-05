@@ -1,8 +1,7 @@
-import { observer } from 'mobx-react-lite'
 import { addQuery } from '../helpers/addQuery'
 import { useHistory } from 'react-router-dom'
 
-export const Pagination = observer(({ page, totalPages }) => {
+export const Pagination = ({ page, totalPages }) => {
   const history = useHistory()
 
   return (
@@ -41,4 +40,4 @@ export const Pagination = observer(({ page, totalPages }) => {
       </button>
     </div>
   )
-})
+}

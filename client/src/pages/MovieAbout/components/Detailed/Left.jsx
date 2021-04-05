@@ -1,22 +1,19 @@
 import { useInterception } from '../../../../hooks/useInterception'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 
-export const Left = ({
-  vote_average,
-  release_date,
-  diffDate,
-  budget,
-  revenue,
-}) => {
+dayjs.extend(relativeTime)
+
+export const Left = ({ vote_average, release_date, budget, revenue }) => {
   const [setRef, visible] = useInterception({ rootMargin: '0px' })
 
   return (
     <div className='lg:w-1/2 sm:w-full'>
       <div className='mb-6'>
         <span>
-          Released: {diffDate.diff} {diffDate.type} ago
+          Released: {dayjs(release_date).fromNow()}
           {'  '}
         </span>
-        <span className='text-gray-500 text-sm'>({release_date})</span>
       </div>
 
       <span>Vote average</span>

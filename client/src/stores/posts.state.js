@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { getPosts } from '../api/rest/posts.api'
+import { postsAPI } from '../api/rest/posts.api'
 import { requestAndToggle } from '../helpers/requestAndToggle'
 
 class Posts {
@@ -17,10 +17,28 @@ class Posts {
   fetchPosts = async () => {
     await requestAndToggle(async () => {
       try {
-        const res = await getPosts()
+        const res = await postsAPI.getPosts()
         this.posts = res.data
       } catch (e) {
-        console.log(e)
+        console.error(e)
+      }
+    }, this.setIsloading)
+  }
+
+  vote = async ({ identifier, slug, value }) => {
+    await requestAndToggle(async () => {
+      try {
+        const res = await postsAPI.vote({ identifier, slug, value })
+
+        const idx = this.posts.findIndex((p) => {
+          return (
+            p.identifier === res.data.identifier && p.slug === res.data.slug
+          )
+        })
+
+        this.posts[idx] = { ...this.posts[idx], ...res.data }
+      } catch (e) {
+        console.error(e)
       }
     }, this.setIsloading)
   }
