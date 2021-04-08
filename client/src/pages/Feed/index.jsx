@@ -1,17 +1,13 @@
 import { observer } from 'mobx-react-lite'
-import { Blog } from './components/Blog'
 import { posts } from '../../stores/posts.state'
 import { Loader } from '../../components/Loader'
 import { useEffect } from 'react'
+import { Blog } from '../../components/Blog'
 
 export const Feed = observer(() => {
   useEffect(() => {
     posts.fetchPosts()
   }, [])
-
-  const vote = ({ identifier, slug, value }) => {
-    posts.vote({ identifier, slug, value })
-  }
 
   return (
     <div className='flex-center flex-col gap-4 my-container mb-4'>
@@ -21,6 +17,7 @@ export const Feed = observer(() => {
             key={p.uuid}
             {...{
               author_name: p.user.username,
+              author_avatar: p.user.imageUrl,
               description: p.body,
               title: p.title,
               identifier: p.identifier,
@@ -29,7 +26,7 @@ export const Feed = observer(() => {
               voteScore: p.voteScore,
               createdAt: p.createdAt,
               userVote: p?.userVote,
-              vote,
+              vote: posts.vote,
             }}
           />
         ))

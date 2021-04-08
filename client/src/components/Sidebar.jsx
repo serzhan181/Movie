@@ -45,12 +45,17 @@ export const Sidebar = observer(() => {
         </div>
         {auth.user.authenticated ? (
           <div>
-            <div
-              className='border-primary border flex-center h-14 w-14 rounded-3xl mb-2 cursor-pointer'
+            <Link
+              to={`/user/${auth.user.username}`}
+              className='border-primary border flex-center h-14 w-14 rounded-3xl mb-2 cursor-pointer overflow-hidden'
               title={auth.user.username}
             >
-              <i className='icon ion-ios-contact text-primary text-4xl'></i>
-            </div>
+              <img
+                src={auth.user.imageUrl}
+                alt={auth.user.username}
+                className='h-full w-full object-cover'
+              />
+            </Link>
             <div
               className='border-red-600 border flex-center h-14 w-14 rounded-3xl mb-2 cursor-pointer'
               title='logout'

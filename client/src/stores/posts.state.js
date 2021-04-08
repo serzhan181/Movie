@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
 import { postsAPI } from '../api/rest/posts.api'
 import { requestAndToggle } from '../helpers/requestAndToggle'
 
@@ -7,18 +7,24 @@ class Posts {
     makeAutoObservable(this)
   }
 
-  isLoading = false
+  isLoading = true
   setIsloading = (bool) => {
     this.isLoading = bool
   }
 
   posts = []
 
+  setPosts = (posts) => {
+    this.posts = posts
+  }
+
   fetchPosts = async () => {
     await requestAndToggle(async () => {
       try {
         const res = await postsAPI.getPosts()
-        this.posts = res.data
+        runInAction(() => {
+          this.posts = res.data
+        })
       } catch (e) {
         console.error(e)
       }
@@ -26,21 +32,20 @@ class Posts {
   }
 
   vote = async ({ identifier, slug, value }) => {
-    await requestAndToggle(async () => {
-      try {
-        const res = await postsAPI.vote({ identifier, slug, value })
+    try {
+      const res = await postsAPI.vote({ identifier, slug, value })
 
-        const idx = this.posts.findIndex((p) => {
-          return (
-            p.identifier === res.data.identifier && p.slug === res.data.slug
-          )
-        })
-
-        this.posts[idx] = { ...this.posts[idx], ...res.data }
-      } catch (e) {
-        console.error(e)
-      }
-    }, this.setIsloading)
+      this.posts.forEach((p) => {
+        if (p.identifier === res.data.identifier && p.slug === res.data.slug) {
+          runInAction(() => {
+            p.voteScore = res.data.voteScore
+            p.userVote = res.data.userVote
+          })
+        }
+      })
+    } catch (e) {
+      console.error(e)
+    }
   }
 }
 

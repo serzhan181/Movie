@@ -3,7 +3,7 @@ import { Post } from './Post'
 import { IsEmail, Length } from 'class-validator'
 import { Entity, Column, BeforeInsert, Index, OneToMany } from 'typeorm'
 import bcrypt from 'bcrypt'
-import { Exclude } from 'class-transformer'
+import { Exclude, Expose } from 'class-transformer'
 import { BaseModel } from './BaseModel'
 
 @Entity('users')
@@ -23,6 +23,9 @@ export class User extends BaseModel {
   @IsEmail()
   email: string
 
+  @Column({ nullable: true })
+  imageUrn: string
+
   @Exclude()
   @Column()
   @Length(6, 255)
@@ -33,6 +36,13 @@ export class User extends BaseModel {
 
   @OneToMany(() => Vote, (vote) => vote.user)
   votes: Vote[]
+
+  @Expose()
+  get imageUrl() {
+    return this.imageUrn
+      ? `${process.env.APP_URL}/images/${this.imageUrn}`
+      : `https://via.placeholder.com/150/222/ccc/?text=${this.username[0]}`
+  }
 
   @BeforeInsert()
   async hashPassword() {

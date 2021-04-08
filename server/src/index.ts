@@ -3,7 +3,7 @@ import { createConnection } from 'typeorm'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
-import { authRouter, postsRoute, miscRoute } from './routes'
+import { authRouter, postsRoute, miscRoute, userRoute } from './routes'
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -19,8 +19,10 @@ app.use(
     optionsSuccessStatus: 200,
   })
 )
+app.use(express.static('public'))
 
 app.use('/auth', authRouter)
+app.use('/user', userRoute)
 app.use('/posts', postsRoute)
 app.use('/misc', miscRoute)
 

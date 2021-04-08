@@ -6,6 +6,7 @@ export const Blog = ({
   title,
   description,
   author_name,
+  author_avatar,
   identifier,
   slug,
   commentCount,
@@ -29,6 +30,7 @@ export const Blog = ({
           <BlogMeta
             {...{
               author_name,
+              author_avatar,
               commentCount,
               voteScore,
               vote,

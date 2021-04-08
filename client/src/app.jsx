@@ -1,5 +1,5 @@
 import { Switch, Route } from 'react-router-dom'
-import { Discover, Home, MovieAbout, Auth, Feed } from './pages'
+import { Discover, Home, MovieAbout, Auth, Feed, User, Error } from './pages'
 import { Sidebar } from './components/Sidebar'
 
 export const App = () => {
@@ -14,6 +14,8 @@ export const App = () => {
           <Route path='/movie/:id' component={MovieAbout} />
           <Route path='/discover' component={Discover} />
           <Route path='/feed' component={Feed} />
+          <Route path='/user/:name' component={User} />
+          <Route path='*' component={Error} />
         </Switch>
       </main>
     </>

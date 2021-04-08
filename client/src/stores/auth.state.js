@@ -22,8 +22,7 @@ class Auth {
     let errors
     await requestAndToggle(async () => {
       try {
-        const res = await authAPI.register(data)
-        console.log(res)
+        await authAPI.register(data)
       } catch (err) {
         errors = err.response.data.errors
         return err.response.data
@@ -56,6 +55,7 @@ class Auth {
     await requestAndToggle(async () => {
       try {
         const { data } = await authAPI.me()
+        if (this.user.authenticated) return
         if (data.success) {
           runInAction(() => {
             this.user = data.user

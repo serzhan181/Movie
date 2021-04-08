@@ -19,11 +19,18 @@ export const requestTMDB = (url, method = 'GET', params = {}, headers = {}) => {
   })
 }
 
-export const request = ({ url, method = 'GET', params = {}, body }) => {
+export const request = ({
+  url,
+  method = 'GET',
+  params = {},
+  body,
+  headers = {},
+}) => {
   const cfg = {
     url: 'http://localhost:5000' + url,
     method,
     params,
+    headers,
     withCredentials: true,
   }
 

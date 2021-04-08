@@ -6,31 +6,34 @@ dayjs.extend(relativeTime)
 
 export const BlogMeta = ({
   author_name,
+  author_avatar,
   commentCount,
   voteScore,
   createdAt,
-  vote,
   identifier,
   slug,
   userVote,
+  vote,
 }) => {
   return (
     <div className='flex items-center justify-between mt-4'>
-      <Link to={`/profile/${author_name}`} className='flex'>
+      <Link to={`/user/${author_name}`} className='flex'>
         <img
-          alt='profil'
-          src={`https://fakeimg.pl/350x200/?text=${author_name[0]}&font=Poppins&retina=1`}
+          alt={author_name}
+          src={author_avatar}
           className='object-cover rounded-full h-8 w-8 '
         />
         <div className='flex flex-col justify-between ml-4 text-xs'>
-          <p className='text-gray-300 dark:text-white'>{author_name}</p>
+          <p className='text-gray-300 dark:text-white hover:underline hover:font-medium'>
+            {author_name}
+          </p>
           <p className='text-gray-400 dark:text-gray-300'>
             {dayjs(createdAt).fromNow()}
           </p>
         </div>
       </Link>
 
-      <div className='flex items-center transition hover:bg-secondary h-full px-2 cursor-pointer'>
+      <div className='flex items-center transition hover:bg-secondary w-40 h-full px-2 cursor-pointer'>
         <i className={`icon ion-ios-text text-gray-300 text-2xl mr-2`}></i>
         <p>
           {commentCount} {commentCount > 1 ? 'Comments' : 'Comment'}
@@ -60,7 +63,7 @@ export const BlogMeta = ({
               : voteScore < 0
               ? 'text-red-600'
               : 'text-yellow-500'
-          } text-2xl font-semibold cursor-default`}
+          } w-8 text-2xl font-semibold cursor-default`}
         >
           {voteScore}
         </p>
