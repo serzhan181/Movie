@@ -1,3 +1,4 @@
+import { Comment } from './Comment'
 import { Vote } from './Vote'
 import { Post } from './Post'
 import { IsEmail, Length } from 'class-validator'
@@ -37,8 +38,7 @@ export class User extends BaseModel {
   @OneToMany(() => Vote, (vote) => vote.user)
   votes: Vote[]
 
-  @Expose()
-  get imageUrl() {
+  @Expose() get imageUrl() {
     return this.imageUrn
       ? `${process.env.APP_URL}/images/${this.imageUrn}`
       : `https://via.placeholder.com/150/222/ccc/?text=${this.username[0]}`

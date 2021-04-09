@@ -17,7 +17,7 @@ class UserController {
 
       const posts = await Post.find({
         where: { user },
-        relations: ['comments', 'votes'],
+        relations: ['comments', 'votes', 'user'],
       })
 
       user.posts = posts

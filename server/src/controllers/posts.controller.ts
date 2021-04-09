@@ -42,12 +42,39 @@ class PostsController {
     try {
       const post = await Post.findOneOrFail(
         { identifier, slug },
-        { relations: ['user'] }
+        { relations: ['user', 'votes', 'comments'] }
       )
+
+      if (res.locals.user) {
+        post.setUserVote(res.locals.user)
+      }
 
       return res.json(post)
     } catch (err) {
       return handleError(res, 'Post not found', 404)
+    }
+  }
+
+  getPostComments = async (req: Request, res: Response) => {
+    const { identifier, slug } = req.params
+
+    try {
+      const post = await Post.findOneOrFail({ identifier, slug })
+
+      const comments = await Comment.find({
+        where: { post },
+        relations: ['votes', 'user'],
+        order: { createdAt: 'DESC' },
+      })
+
+      if (res.locals.user) {
+        post.setUserVote(res.locals.user)
+        comments.forEach((c) => c.setUserVote(res.locals.user))
+      }
+
+      return res.json(comments)
+    } catch (err) {
+      return handleError(err)
     }
   }
 
@@ -71,7 +98,6 @@ class PostsController {
 
     try {
       const post = await Post.findOneOrFail({ identifier, slug })
-
       const comment = new Comment({ body, user: res.locals.user, post })
 
       await comment.save()
@@ -83,4 +109,4 @@ class PostsController {
   }
 }
 
-export const postsController = new PostsController()
+export const posts = new PostsController()

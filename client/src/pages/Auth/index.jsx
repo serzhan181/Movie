@@ -16,6 +16,13 @@ export const Auth = observer(() => {
   const { path } = useRouteMatch()
   const history = useHistory()
 
+  const handleDemo = async () => {
+    const errors = await auth.login({ username: 'demo', password: '123456' })
+    if (!errors) {
+      history.push('/')
+    }
+  }
+
   const onSubmit = async ({ type, setError }, data) => {
     if (type === 'login') {
       const errors = await auth.login(data)
@@ -56,6 +63,7 @@ export const Auth = observer(() => {
         component={AuthCommon.bind(null, {
           type: 'login',
           onSubmit,
+          handleDemo,
         })}
         exact
       />

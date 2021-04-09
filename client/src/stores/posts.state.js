@@ -18,6 +18,22 @@ class Posts {
     this.posts = posts
   }
 
+  fetchPost = async (identifier, slug) => {
+    await requestAndToggle(async () => {
+      try {
+        const { data: post } = await postsAPI.getPost(identifier, slug)
+        const { data: postComments } = await postsAPI.getPostComments(
+          identifier,
+          slug
+        )
+
+        this.singlePost = { ...post, comments: postComments }
+      } catch (e) {
+        console.error(e)
+      }
+    }, this.setIsloading)
+  }
+
   fetchPosts = async () => {
     await requestAndToggle(async () => {
       try {

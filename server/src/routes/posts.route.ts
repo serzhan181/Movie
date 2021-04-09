@@ -1,20 +1,16 @@
 import { userMdl } from './../middlewares/user.middleware'
 import { Router } from 'express'
-import { postsController } from '../controllers/posts.controller'
+import { posts } from '../controllers/posts.controller'
 import { authMdl } from '../middlewares/auth.middleware'
 
 const route = Router()
 
-route.get('/', userMdl, postsController.getPosts)
-route.post('/', userMdl, authMdl, postsController.create)
-route.get('/:identifier/:slug', postsController.getPost)
-route.delete('/delete', userMdl, authMdl, postsController.deletePost)
+route.get('/', userMdl, posts.getPosts)
+route.post('/', userMdl, authMdl, posts.create)
+route.get('/:identifier/:slug', userMdl, posts.getPost)
+route.delete('/delete', userMdl, authMdl, posts.deletePost)
 
-route.post(
-  '/:identifier/:slug/comments',
-  userMdl,
-  authMdl,
-  postsController.commentOnPost
-)
+route.post('/:identifier/:slug/comments', userMdl, authMdl, posts.commentOnPost)
+route.get('/:identifier/:slug/comments', userMdl, posts.getPostComments)
 
 export { route }
