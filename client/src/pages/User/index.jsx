@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router'
 import { observer } from 'mobx-react-lite'
-import { Loader } from '../../components/Loader'
+import { PageLoader } from '../../components/PageLoader'
 import { Blogs } from '../../components/Blogs'
 import { Error } from '../Error'
 import { user } from '../../stores/user.state'
@@ -15,9 +15,9 @@ export const User = observer(() => {
   useEffect(() => {
     ;(async () => {
       if (name) {
-        const { error } = await user.fetchUser(name)
-        if (error) {
-          setError(error)
+        const res = await user.fetchUser(name)
+        if (res?.error) {
+          setError(res.error)
         }
       }
     })()
@@ -49,7 +49,7 @@ export const User = observer(() => {
     return <Error message={error} />
   }
 
-  return !user.isLoading ? (
+  return user?.userInfo ? (
     <>
       <div className='flex-center flex-col mb-4'>
         <div className='rounded-full h-52 w-52 relative overflow-hidden'>
@@ -92,6 +92,6 @@ export const User = observer(() => {
       </div>
     </>
   ) : (
-    <Loader height='h-screen' />
+    <PageLoader />
   )
 })

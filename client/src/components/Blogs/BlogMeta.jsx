@@ -33,12 +33,15 @@ export const BlogMeta = ({
         </div>
       </Link>
 
-      <div className='flex items-center transition hover:bg-secondary w-40 h-full px-2 cursor-pointer'>
+      <Link
+        to={`/feed/${identifier}/${slug}#comments`}
+        className='flex items-center transition hover:bg-secondary w-40 h-full px-2 cursor-pointer'
+      >
         <i className={`icon ion-ios-text text-gray-300 text-2xl mr-2`}></i>
         <p>
           {commentCount} {commentCount > 1 ? 'Comments' : 'Comment'}
         </p>
-      </div>
+      </Link>
 
       <div className='flex'>
         <div className='mr-6 h-full'>

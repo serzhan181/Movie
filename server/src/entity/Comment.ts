@@ -36,6 +36,7 @@ export class Comment extends BaseModel {
   @JoinColumn({ name: 'username', referencedColumnName: 'username' })
   user: User
 
+  @Exclude()
   @ManyToOne(() => Post, (post) => post.comments, { nullable: false })
   post: Post
 

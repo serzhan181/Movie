@@ -12,5 +12,6 @@ route.delete('/delete', userMdl, authMdl, posts.deletePost)
 
 route.post('/:identifier/:slug/comments', userMdl, authMdl, posts.commentOnPost)
 route.get('/:identifier/:slug/comments', userMdl, posts.getPostComments)
+route.delete('/:postId/:slug/:commentId', userMdl, authMdl, posts.deleleComment)
 
 export { route }

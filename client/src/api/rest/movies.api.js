@@ -7,7 +7,7 @@ const getPopularMovies = (page) => {
 }
 
 const getSingleMovie = (id) => {
-  return requestTMDB(`/movie/${id}`, 'GET')
+  return requestTMDB(`/movie/${id}?language=en-US`, 'GET')
 }
 
 const getSimularMovies = (id) => {
@@ -24,9 +24,10 @@ const getMovie = (query, page) => {
   })
 }
 
+// DEPRECATED
 const getMovieByCategory = (genreId, page) => {
   return requestTMDB(
-    `/movie?sort_by=popularity.desc&include_adult=true&include_video=false&page=1&with_genres=${genreId}`,
+    `/movie?sort_by=popularity.desc&include_adult=true&include_video=false&with_genres=${genreId}`,
     'GET',
     { page }
   )

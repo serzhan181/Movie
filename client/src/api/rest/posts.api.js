@@ -20,9 +20,26 @@ const vote = ({ identifier, slug, value }) => {
   })
 }
 
+const commentPost = ({ identifier, slug, body }) => {
+  return request({
+    url: `/posts/${identifier}/${slug}/comments`,
+    method: 'POST',
+    body: { body },
+  })
+}
+
+const deleteComment = ({ postId, slug, commentId }) => {
+  return request({
+    url: `/posts/${postId}/${slug}/${commentId}`,
+    method: 'DELETE',
+  })
+}
+
 export const postsAPI = {
   getPosts,
   getPost,
   getPostComments,
   vote,
+  commentPost,
+  deleteComment,
 }

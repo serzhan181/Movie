@@ -26,7 +26,12 @@ export const Sidebar = observer(() => {
           </Link>
           <ul className='mt-5'>
             {sidebarItems.map((n) => (
-              <Link to={n.href} key={n.id} title={n.title}>
+              <Link
+                className='outline-none'
+                to={n.href}
+                key={n.id}
+                title={n.title}
+              >
                 <li
                   className={`border-solid border-primary ${
                     n.href === pathname && 'bg-primary-light'

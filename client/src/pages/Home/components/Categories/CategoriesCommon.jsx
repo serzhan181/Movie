@@ -10,7 +10,7 @@ const items = [
   { emoji: '🦊', label: 'Cartoon', id: '16' },
 ]
 
-export const CategoriesCommon = ({ activeId, handleGenreSet, isLoading }) => {
+export const CategoriesCommon = ({ handleGenreSet, isLoading }) => {
   return (
     <div className='mt-6'>
       <ul className='flex gap-3 flex-wrap'>
@@ -18,7 +18,7 @@ export const CategoriesCommon = ({ activeId, handleGenreSet, isLoading }) => {
           <li key={item.id} onClick={() => handleGenreSet(item.id)}>
             <button
               className={`btn flex-center flex-col py-5 justify-between h-24 w-20 ${
-                activeId === item.id
+                '0' === item.id
                   ? 'bg-orange shadow-orange-active'
                   : 'bg-primary-light'
               } ${isLoading && 'disabled:opacity-50'}`}

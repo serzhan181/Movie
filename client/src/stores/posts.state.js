@@ -1,50 +1,45 @@
 import { makeAutoObservable, runInAction } from 'mobx'
 import { postsAPI } from '../api/rest/posts.api'
-import { requestAndToggle } from '../helpers/requestAndToggle'
 
 class Posts {
   constructor() {
     makeAutoObservable(this)
   }
 
-  isLoading = true
-  setIsloading = (bool) => {
-    this.isLoading = bool
-  }
-
   posts = []
+  singlePost = null
 
   setPosts = (posts) => {
     this.posts = posts
   }
 
   fetchPost = async (identifier, slug) => {
-    await requestAndToggle(async () => {
-      try {
-        const { data: post } = await postsAPI.getPost(identifier, slug)
-        const { data: postComments } = await postsAPI.getPostComments(
-          identifier,
-          slug
-        )
+    this.singlePost = null
+    try {
+      const { data: post } = await postsAPI.getPost(identifier, slug)
+      const { data: postComments } = await postsAPI.getPostComments(
+        identifier,
+        slug
+      )
 
+      runInAction(() => {
         this.singlePost = { ...post, comments: postComments }
-      } catch (e) {
-        console.error(e)
-      }
-    }, this.setIsloading)
+      })
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   fetchPosts = async () => {
-    await requestAndToggle(async () => {
-      try {
-        const res = await postsAPI.getPosts()
-        runInAction(() => {
-          this.posts = res.data
-        })
-      } catch (e) {
-        console.error(e)
-      }
-    }, this.setIsloading)
+    this.posts = []
+    try {
+      const res = await postsAPI.getPosts()
+      runInAction(() => {
+        this.posts = res.data
+      })
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   vote = async ({ identifier, slug, value }) => {
@@ -61,6 +56,45 @@ class Posts {
       })
     } catch (e) {
       console.error(e)
+    }
+  }
+
+  commentPost = async ({ identifier, slug, body }) => {
+    if (!body?.length) return
+    try {
+      const { status, data } = await postsAPI.commentPost({
+        identifier,
+        slug,
+        body,
+      })
+      if (status === 200) {
+        runInAction(() => {
+          this.singlePost.comments = [data, ...this.singlePost.comments]
+        })
+      }
+    } catch (e) {
+      console.warn(e)
+    }
+  }
+
+  deleteComment = async ({ commentId }) => {
+    try {
+      if (!this.singlePost) return
+
+      const { data } = await postsAPI.deleteComment({
+        postId: this.singlePost.identifier,
+        slug: this.singlePost.slug,
+        commentId,
+      })
+      if (data?.success) {
+        runInAction(() => {
+          this.singlePost.comments = this.singlePost.comments.filter(
+            (c) => c.identifier !== commentId
+          )
+        })
+      }
+    } catch (e) {
+      console.log(e)
     }
   }
 }

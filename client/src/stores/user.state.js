@@ -1,5 +1,4 @@
 import { makeAutoObservable, runInAction } from 'mobx'
-import { requestAndToggle } from '../helpers/requestAndToggle'
 import { userAPI } from '../api/rest/user.api'
 import { posts } from './posts.state'
 
@@ -14,21 +13,18 @@ class User {
   userInfo = null
 
   fetchUser = async (username) => {
-    let error
-    await requestAndToggle(async () => {
-      try {
-        const { data } = await userAPI.getUser(username)
-        posts.setPosts(data.posts)
-        runInAction(() => {
-          this.userInfo = { ...data, posts: undefined }
-        })
-        return
-      } catch (err) {
-        error = err.response.data.error
-        console.log(err)
-      }
-    }, this.setIsloading)
-    return { error }
+    this.userInfo = null
+    try {
+      const { data } = await userAPI.getUser(username)
+      posts.setPosts(data.posts)
+      runInAction(() => {
+        this.userInfo = { ...data, posts: undefined }
+      })
+      return
+    } catch (err) {
+      console.log(err)
+      return { error: err.response.data.error }
+    }
   }
 
   uploadProfileImage = async (formData) => {

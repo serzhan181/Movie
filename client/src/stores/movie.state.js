@@ -1,16 +1,15 @@
 import { makeAutoObservable, runInAction } from 'mobx'
 import { moviesAPI } from '../api/rest/movies.api'
-import { requestAndToggle } from '../helpers/requestAndToggle'
 
 class Movie {
-  curMovie = {}
+  curMovie = null
 
   isLoading = true
   setLoading = (bool) => {
     this.isLoading = bool
   }
 
-  movieList = {}
+  movieList = null
 
   constructor() {
     makeAutoObservable(this)
@@ -18,62 +17,58 @@ class Movie {
 
   // async
   getPopularMovies = async (page = 1) => {
-    requestAndToggle(async () => {
-      try {
-        const res = await moviesAPI.getPopularMovies(page)
-        runInAction(() => {
-          this.movieList = res.data
-        })
-      } catch (err) {
-        console.warn(err)
-      }
-    }, this.setLoading)
+    this.movieList = null
+    try {
+      const res = await moviesAPI.getPopularMovies(page)
+      runInAction(() => {
+        this.movieList = res.data
+      })
+    } catch (err) {
+      console.warn(err)
+    }
   }
 
   getSingleMovie = async (id) => {
-    requestAndToggle(async () => {
-      try {
-        runInAction(() => (this.curMovie = {}))
-        const single_movie = await moviesAPI.getSingleMovie(id)
-        const yt_videos = await moviesAPI.getYoutubeTrailer(id)
-        const simulars = await moviesAPI.getSimularMovies(id)
-        runInAction(() => {
-          this.curMovie = single_movie.data
-          this.curMovie.ytId = yt_videos.data.results[0]
-          this.curMovie.simulars = simulars.data.results
-        })
-      } catch (err) {
-        console.warn(err)
-      }
-    }, this.setLoading)
+    this.curMovie = null
+    try {
+      const single_movie = await moviesAPI.getSingleMovie(id)
+      const yt_videos = await moviesAPI.getYoutubeTrailer(id)
+      const simulars = await moviesAPI.getSimularMovies(id)
+      runInAction(() => {
+        this.curMovie = single_movie.data
+        this.curMovie.ytId = yt_videos.data.results[0]
+        this.curMovie.simulars = simulars.data.results
+      })
+    } catch (err) {
+      console.warn(err)
+    }
   }
 
   getMovie = async (query, page = 1) => {
-    requestAndToggle(async () => {
-      try {
-        const res = await moviesAPI.getMovie(query, page)
+    this.movieList = null
+    try {
+      const res = await moviesAPI.getMovie(query, page)
 
-        runInAction(() => {
-          this.movieList = res.data
-        })
-      } catch (err) {
-        console.warn(err)
-      }
-    }, this.setLoading)
+      runInAction(() => {
+        this.movieList = res.data
+      })
+    } catch (err) {
+      console.warn(err)
+    }
   }
 
-  getMovieByCategory = async (genreId, page = 1) => {
-    requestAndToggle(async () => {
-      try {
-        const res = await moviesAPI.getMovieByCategory(genreId, page)
+  // DEPRECATED
+  getMovieByCategory = async (genreId, page) => {
+    this.movieList = null
+    try {
+      const res = await moviesAPI.getMovieByCategory(genreId, page)
 
-        runInAction(() => {
-          this.movieList = res.data
-        })
-      } catch (err) {
-        console.warn(err)
-      }
-    }, this.setLoading)
+      runInAction(() => {
+        this.movieList = res.data
+      })
+    } catch (err) {
+      console.warn(err)
+    }
   }
 }
 

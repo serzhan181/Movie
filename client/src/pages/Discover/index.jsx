@@ -15,7 +15,5 @@ export const Discover = observer(() => {
       movie.getMovie(searchQuery, query.get('page') || 1)
     }
   }, [query.get('query'), query.get('page')])
-  return (
-    <DiscoverCommon movieList={movie.movieList} isLoading={movie.isLoading} />
-  )
+  return <DiscoverCommon movieList={movie.movieList} />
 })

@@ -1,16 +1,16 @@
 import { Search } from '../../components/Search'
 import { Cards } from '../../components/Cards'
-import { Loader } from '../../components/Loader'
+import { PageLoader } from '../../components/PageLoader'
 import { Pagination } from '../../components/Pagination'
 
-export const DiscoverCommon = ({ movieList, isLoading }) => {
+export const DiscoverCommon = ({ movieList }) => {
   return (
     <div className='container'>
       <div className='flex justify-center'>
         <Search />
       </div>
-      {isLoading ? (
-        <Loader height='h-80-screen' />
+      {!movieList ? (
+        <PageLoader />
       ) : movieList?.results.length ? (
         <>
           <Cards movieList={movieList} />

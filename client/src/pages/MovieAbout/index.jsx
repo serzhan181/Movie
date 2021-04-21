@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
-import { Loader } from '../../components/Loader'
+import { PageLoader } from '../../components/PageLoader'
 import { useParams } from 'react-router-dom'
 import { scrollToTop } from '../../helpers/scrollToTop'
 import { movie } from '../../stores/movie.state'
@@ -15,7 +15,7 @@ export const MovieAbout = observer(() => {
     })()
   }, [id])
 
-  return !movie.isLoading ? (
+  return movie.curMovie ? (
     <>
       <Introduction {...{ curMovie: movie.curMovie }} />
       <div className='py-3 px-6'>
@@ -24,6 +24,6 @@ export const MovieAbout = observer(() => {
       </div>
     </>
   ) : (
-    <Loader height='h-screen' />
+    <PageLoader />
   )
 })

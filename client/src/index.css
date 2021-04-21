@@ -3,8 +3,12 @@
 @tailwind utilities;
 
 @layer components {
+  .my-container {
+    @apply pl-4 py-2;
+  }
+
   .main-content {
-    @apply pl-2 md:pl-20 h-full w-full;
+    @apply pl-2 md:pl-20 w-full;
   }
 
   .flex-center {

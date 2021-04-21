@@ -40,6 +40,8 @@ module.exports = {
     extend: {
       scale: ['hover'],
       fontWeight: ['hover', 'focus'],
+      opacity: ['disabled'],
+      borderWidth: ['focus'],
     },
   },
   plugins: [],

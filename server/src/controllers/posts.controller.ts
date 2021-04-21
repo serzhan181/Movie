@@ -107,6 +107,21 @@ class PostsController {
       return handleError(res, 'Post not found.', 400)
     }
   }
+
+  deleleComment = async (req: Request, res: Response) => {
+    const user = res.locals.user
+    const { postId, slug, commentId } = req.params
+
+    try {
+      const post = await Post.findOneOrFail({ identifier: postId, slug })
+      await Comment.delete({ post, identifier: commentId })
+
+      return res.json({ success: true })
+    } catch (err) {
+      console.log(err)
+      return handleError(res)
+    }
+  }
 }
 
 export const posts = new PostsController()
