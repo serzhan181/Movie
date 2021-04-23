@@ -22,6 +22,10 @@ export class Post extends BaseModel {
     Object.assign(this, post)
   }
 
+  @Exclude()
+  @Column({ nullable: true })
+  postImgUrn: string
+
   @Index()
   @Column()
   identifier: string // 7 character id
@@ -53,6 +57,12 @@ export class Post extends BaseModel {
 
   @Expose() get voteScore(): number {
     return this.votes?.reduce((acc, cur) => acc + +cur.value, 0)
+  }
+
+  @Expose() get postImg() {
+    return this.postImgUrn
+      ? `${process.env.APP_URL}/images/posts/${this.postImgUrn}`
+      : null
   }
 
   protected userVote: number

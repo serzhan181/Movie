@@ -42,6 +42,27 @@ class Posts {
     }
   }
 
+  createPost = async (props) => {
+    try {
+      const file = props.file
+      const { status, data } = await postsAPI.createPost(props)
+      if (status === 200 && file) {
+        // If passed looks like: ['filename', File]
+        await this.uploadPostImg({
+          formData: file,
+          postId: data.identifier,
+          slug: data.slug,
+        })
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  uploadPostImg = async ({ formData, postId, slug }) => {
+    await postsAPI.uploadPostImg({ formData, postId, slug })
+  }
+
   vote = async ({ identifier, slug, value }) => {
     try {
       const res = await postsAPI.vote({ identifier, slug, value })

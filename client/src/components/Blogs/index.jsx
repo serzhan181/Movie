@@ -17,6 +17,7 @@ export const Blogs = ({ showBody = false, vote, posts }) => {
             slug: p.slug,
             userVote: p?.userVote,
             voteScore: p.voteScore,
+            postImg: p.postImg,
             vote,
           }}
         />
@@ -24,17 +25,3 @@ export const Blogs = ({ showBody = false, vote, posts }) => {
     </>
   )
 }
-
-/*
-  title,
-  description,
-  author_name,
-  author_avatar,
-  identifier,
-  slug,
-  commentCount,
-  voteScore,
-  createdAt,
-  userVote,
-  vote,
-*/

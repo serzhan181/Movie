@@ -2,6 +2,7 @@ import { Comment } from './../entity/Comment'
 import { handleError } from './../helpers/handleError'
 import { Post } from './../entity/Post'
 import { Request, Response } from 'express'
+import fs from 'fs'
 
 class PostsController {
   create = async (req: Request, res: Response) => {
@@ -15,6 +16,28 @@ class PostsController {
 
       return res.json(post)
     } catch (err) {
+      return handleError(res)
+    }
+  }
+
+  uploadImg = async (req: Request, res: Response) => {
+    const user = res.locals.user
+    const { postId, slug } = req.params
+    try {
+      const post = await Post.findOneOrFail(
+        { identifier: postId, slug: slug },
+        { relations: ['user'] }
+      )
+      if (user.username !== post.user.username) throw new Error()
+      if (post?.postImgUrn?.length) {
+        fs.unlinkSync(`public\\images\\posts\\${post.postImgUrn}`)
+      }
+      post.postImgUrn = req.file.filename
+
+      await post.save()
+      return res.json({ success: true })
+    } catch (e) {
+      console.log(e)
       return handleError(res)
     }
   }

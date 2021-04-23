@@ -28,7 +28,7 @@
   }
 
   .btn {
-    @apply rounded-full select-none transition-all duration-300 ease-out focus:outline-none bg-primary-light text-center;
+    @apply rounded-full select-none transition-all duration-300 ease-out outline-none focus:outline-none bg-primary-light text-center;
   }
 
   .mini-card {

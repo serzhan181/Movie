@@ -23,8 +23,6 @@ const upload = multer({
     if (['image/jpeg', 'image/png'].includes(file.mimetype)) {
       return callback(null, true)
     }
-
-    console.log('I SHOULD BE THERE')
     return callback(new Error('file not an image.'))
   },
 })

@@ -12,6 +12,22 @@ const getPosts = () => {
   return request({ url: '/posts', method: 'GET' })
 }
 
+const createPost = ({ title, body }) => {
+  return request({
+    url: '/posts',
+    method: 'POST',
+    body: { title, body },
+  })
+}
+
+const uploadPostImg = ({ formData, postId, slug }) => {
+  return request({
+    url: `/posts/upload_image/${postId}/${slug}`,
+    method: 'POST',
+    body: formData,
+  })
+}
+
 const vote = ({ identifier, slug, value }) => {
   return request({
     url: '/misc/vote',
@@ -40,6 +56,8 @@ export const postsAPI = {
   getPost,
   getPostComments,
   vote,
+  createPost,
   commentPost,
   deleteComment,
+  uploadPostImg,
 }
