@@ -16,24 +16,25 @@ app.use(cookieParser())
 app.use(
   cors({
     credentials: true,
-    origin: process.env.ORIGIN,
+    origin: '*',
     optionsSuccessStatus: 200,
   })
 )
-app.use(express.static('public'))
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build')))
+  app.use(express.static(path.join(__dirname, '..', 'client/build')))
 }
-// ROUTES
+app.use(express.static('public'))
 
+// ROUTES
 app.use('/auth', authRouter)
 app.use('/user', userRoute)
 app.use('/posts', postsRoute)
 app.use('/misc', miscRoute)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build/index.html'))
-})
+app.get('*', (_, res) =>
+  res.sendFile(path.join(__dirname, '..', 'client/build/index.html'))
+)
+
 // CONNECTION
 createConnection()
   .then(() => {

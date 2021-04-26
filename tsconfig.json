@@ -4,8 +4,8 @@
          "es5",
          "es6"
       ],
-      "target": "es6",
-      "module": "commonjs",
+      "target": "ES6",
+      "module": "CommonJS",
       "moduleResolution": "node",
       "outDir": "./build",
       "emitDecoratorMetadata": true,
