@@ -23,10 +23,10 @@ export const Post = observer(() => {
       {!posts.singlePost ? (
         <PageLoader />
       ) : (
-        <div className='flex-center flex-col gap-4 my-4'>
+        <div className='flex-center flex-col gap-4 my-container'>
           {/* Actually, only one post will be there. Just was too lazy to make other component for that. KISS ;) */}
-          <Blogs showBody={true} vote={posts.vote} posts={[posts.singlePost]} />
-          <div className='w-3/5'>
+          <Blogs posts={[posts.singlePost]} vote={posts.vote} showBody />
+          <div className='w-full lg:w-3/5'>
             <Private>
               <InputComment
                 {...{ identifier, slug, handleCommentPost: posts.commentPost }}

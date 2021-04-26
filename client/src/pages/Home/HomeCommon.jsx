@@ -6,7 +6,7 @@ import { PageLoader } from '../../components/PageLoader'
 
 export const HomeCommon = ({ movieList }) => {
   return (
-    <main className='flex-center w-full'>
+    <main className='flex-center w-full my-container'>
       <div>
         <div className='flex flex-col md:justify-between md:flex-row'>
           <h1 className='font-bold text-4xl cursor-default'>Dashboard</h1>

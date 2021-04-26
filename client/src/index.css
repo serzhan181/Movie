@@ -4,11 +4,11 @@
 
 @layer components {
   .my-container {
-    @apply pl-4 py-2;
+    @apply md:pl-4 md:py-2;
   }
 
   .main-content {
-    @apply pl-2 md:pl-20 w-full;
+    @apply md:pl-20 w-full;
   }
 
   .flex-center {
@@ -16,7 +16,7 @@
   }
 
   .card {
-    @apply flex w-full h-24 lg:w-36 lg:h-56 xl:w-60 xl:h-96 overflow-hidden rounded-3xl bg-secondary border-2 border-primary-light cursor-pointer relative;
+    @apply flex w-full h-24 lg:w-28 lg:h-52 xl:w-60 xl:h-96 overflow-hidden rounded-3xl bg-secondary border-2 border-primary-light cursor-pointer relative;
   }
 
   .card__description {

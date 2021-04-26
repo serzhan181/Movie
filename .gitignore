@@ -2,7 +2,7 @@
 
 # dependencies
 client/node_modules
-server/node_modules
+/node_modules
 /.pnp
 .pnp.js
 
@@ -29,6 +29,6 @@ api-about.txt
 client/src/stores/mockData.js
 client/src/api/config.js
 
-server/.env
-server/yarn.lock
-server/src/migration
+.env
+yarn.lock
+src/migration

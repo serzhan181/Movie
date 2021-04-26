@@ -67,6 +67,16 @@ class Posts {
     try {
       const res = await postsAPI.vote({ identifier, slug, value })
 
+      if (this.singlePost) {
+        runInAction(() => {
+          this.singlePost = {
+            ...this.singlePost,
+            voteScore: res.data.voteScore,
+            userVote: res.data.userVote,
+          }
+        })
+      }
+
       this.posts.forEach((p) => {
         if (p.identifier === res.data.identifier && p.slug === res.data.slug) {
           runInAction(() => {

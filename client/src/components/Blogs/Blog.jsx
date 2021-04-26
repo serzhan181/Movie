@@ -18,7 +18,7 @@ export const Blog = ({
   vote,
 }) => {
   return (
-    <div className='overflow-hidden shadow-lg rounded-lg h-auto w-10/12'>
+    <div className='overflow-hidden shadow-lg lg:rounded-lg h-auto lg:w-10/12'>
       <div className='w-full h-full'>
         {postImg && (
           <Link to={`/feed/${identifier}/${slug}`}>

@@ -17,13 +17,13 @@ export const BlogMeta = ({
 }) => {
   return (
     <div className='flex items-center justify-between mt-4'>
-      <Link to={`/user/${author_name}`} className='flex'>
+      <Link to={`/user/${author_name}`} className='hidden lg:flex'>
         <img
           alt={author_name}
           src={author_avatar}
           className='object-cover rounded-full h-8 w-8 '
         />
-        <div className='flex flex-col justify-between ml-4 text-xs'>
+        <div className='flex-col justify-between ml-4 text-xs'>
           <p className='text-gray-300 dark:text-white hover:underline hover:font-medium'>
             {author_name}
           </p>
@@ -46,13 +46,17 @@ export const BlogMeta = ({
       <div className='flex'>
         <div className='mr-6 h-full'>
           <i
-            onClick={() => vote({ identifier, slug, value: 1 })}
+            onClick={() =>
+              vote({ identifier, slug, value: userVote === 1 ? 0 : 1 })
+            }
             className={`icon ion-ios-arrow-up transition text-gray-400 text-2xl cursor-pointer mr-2 hover:bg-gray-300 ${
               userVote !== 1 && 'hover:text-blue-500'
             } px-2 ${userVote === 1 && 'text-red-500 bg-gray-300'}`}
           ></i>
           <i
-            onClick={() => vote({ identifier, slug, value: -1 })}
+            onClick={() =>
+              vote({ identifier, slug, value: userVote === -1 ? 0 : -1 })
+            }
             className={`icon ion-ios-arrow-down transition text-gray-400 text-2xl cursor-pointer hover:bg-gray-300 ${
               userVote !== -1 && 'hover:text-red-500'
             } px-2 ${userVote === -1 && 'text-blue-500 bg-gray-300'}`}
