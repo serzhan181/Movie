@@ -27,7 +27,7 @@ export const request = ({
   headers = {},
 }) => {
   const cfg = {
-    url: 'http://localhost:5000' + url,
+    url,
     method,
     params,
     headers,

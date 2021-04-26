@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import { authRouter, postsRoute, miscRoute, userRoute } from './routes'
 import dotenv from 'dotenv'
+import path from 'path'
 dotenv.config()
 
 const PORT = process.env.PORT || 5000
@@ -21,11 +22,19 @@ app.use(
 )
 app.use(express.static('public'))
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/public')))
+}
+// ROUTES
+
 app.use('/auth', authRouter)
 app.use('/user', userRoute)
 app.use('/posts', postsRoute)
 app.use('/misc', miscRoute)
-
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'))
+})
+// CONNECTION
 createConnection()
   .then(() => {
     app.listen(PORT, () => {
