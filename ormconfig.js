@@ -8,7 +8,11 @@ module.exports = {
   url: process.env.NODE_ENV === 'production' ? prodConfig : devConfig,
   synchronize: true,
   logging: false,
-  entities: ['src/entity/**/*.ts'],
+  entities: [
+    'src/entity/**/*{.ts,.js}',
+    'build/entity/**/*{.ts,.js}',
+    'entity/*{.ts,.js}',
+  ],
   migrations: ['src/migration/**/*.ts'],
   subscribers: ['src/subscriber/**/*.ts'],
   cli: {

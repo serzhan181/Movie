@@ -13,19 +13,14 @@ class Auth {
   }
 
   register = async (data) => {
-    let errors
     try {
       await authAPI.register(data)
     } catch (err) {
-      errors = err.response.data.errors
-      return err.response.data
+      return err.response.data.errors
     }
-
-    return errors
   }
 
   login = async (data) => {
-    let errors
     try {
       const res = await authAPI.login(data)
       if (res.data.success) {
@@ -35,10 +30,8 @@ class Auth {
         })
       }
     } catch (err) {
-      errors = err.response.data
       return err.response.data
     }
-    return errors
   }
 
   me = async () => {

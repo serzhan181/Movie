@@ -1,4 +1,3 @@
-import { Comment } from './Comment'
 import { Vote } from './Vote'
 import { Post } from './Post'
 import { IsEmail, Length } from 'class-validator'

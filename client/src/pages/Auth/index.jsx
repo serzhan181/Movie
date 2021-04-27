@@ -27,7 +27,6 @@ export const Auth = observer(() => {
     if (type === 'login') {
       const errors = await auth.login(data)
       if (errors && Object.keys(errors)) {
-        debugger
         Object.keys(errors).forEach((key) => {
           setError(key, {
             type: 'manual',
