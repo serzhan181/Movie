@@ -69,6 +69,7 @@ class AuthController {
                 return res.json({ success: true, user });
             }
             catch (err) {
+                console.log('EROR', err);
                 return handleError_1.handleError(res);
             }
         });

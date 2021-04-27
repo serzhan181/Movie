@@ -21,9 +21,7 @@ app.use(cors_1.default({
     origin: '*',
     optionsSuccessStatus: 200,
 }));
-if (process.env.NODE_ENV === 'production') {
-    app.use(express_1.default.static(path_1.default.join(__dirname, '..', 'client/build')));
-}
+app.use(express_1.default.static(path_1.default.join(__dirname, '..', 'client/build')));
 app.use(express_1.default.static('public'));
 // ROUTES
 app.use('/auth', routes_1.authRouter);
