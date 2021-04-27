@@ -1,1 +1,1 @@
-web: cd build/ && node index.js
+web: ls && node index.js
