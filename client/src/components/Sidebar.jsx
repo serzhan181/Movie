@@ -89,11 +89,11 @@ export const Sidebar = observer(() => {
           ) : (
             <div>
               <Link
-                to='/auth/login'
+                to='/auth/sign_in'
                 className='border-green-600 border text-green-600 font-light flex-center h-14 w-14 rounded-3xl mb-2 cursor-pointer'
                 title='log in'
               >
-                LOGIN
+                SIGN IN
               </Link>
               <Link
                 to='/auth/signup'

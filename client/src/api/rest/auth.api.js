@@ -8,7 +8,7 @@ const register = (data) => {
   })
 }
 
-const login = (data) => {
+const signin = (data) => {
   return request({
     url: '/auth/login',
     method: 'POST',
@@ -30,7 +30,7 @@ const logout = () => {
 
 export const authAPI = {
   register,
-  login,
+  signin,
   logout,
   me,
 }

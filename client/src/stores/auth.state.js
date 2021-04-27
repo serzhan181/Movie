@@ -20,9 +20,9 @@ class Auth {
     }
   }
 
-  login = async (data) => {
+  signin = async (data) => {
     try {
-      const res = await authAPI.login(data)
+      const res = await authAPI.signin(data)
       if (res.data.success) {
         runInAction(() => {
           this.user = res.data.user

@@ -17,7 +17,7 @@ export const Auth = observer(() => {
   const history = useHistory()
 
   const handleDemo = async () => {
-    const errors = await auth.login({ username: 'demo', password: '123456' })
+    const errors = await auth.signin({ username: 'demo', password: '123456' })
     if (!errors) {
       history.push('/')
     }
@@ -25,7 +25,7 @@ export const Auth = observer(() => {
 
   const onSubmit = async ({ type, setError }, data) => {
     if (type === 'sign in') {
-      const errors = await auth.login(data)
+      const errors = await auth.signin(data)
       if (errors && Object.keys(errors)) {
         Object.keys(errors).forEach((key) => {
           setError(key, {
