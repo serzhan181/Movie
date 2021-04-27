@@ -22,7 +22,7 @@ export const AuthCommon = ({ type, onSubmit, handleDemo = '' }) => {
   })
   return (
     <div className='h-screen w-full flex-center flex-col'>
-      {type === 'login' && (
+      {type === 'sign in' && (
         <button
           className='btn p-2 text-xl w-24'
           onClick={handleDemo}
@@ -99,7 +99,7 @@ export const AuthCommon = ({ type, onSubmit, handleDemo = '' }) => {
               {type}
             </button>
             {type === 'sign up' && (
-              <Link to='/auth/login' className='underline w-24 ml-4'>
+              <Link to='/auth/sign_in' className='underline w-24 ml-4'>
                 Demo account
               </Link>
             )}

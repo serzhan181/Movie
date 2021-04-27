@@ -24,7 +24,7 @@ export const Auth = observer(() => {
   }
 
   const onSubmit = async ({ type, setError }, data) => {
-    if (type === 'login') {
+    if (type === 'sign in') {
       const errors = await auth.login(data)
       if (errors && Object.keys(errors)) {
         Object.keys(errors).forEach((key) => {
@@ -51,16 +51,16 @@ export const Auth = observer(() => {
 
         return
       }
-      history.push(`${path}/login`)
+      history.push(`${path}/sign_in`)
     }
   }
 
   return (
     <Switch>
       <Route
-        path={`${path}/login`}
+        path={`${path}/sign_in`}
         component={AuthCommon.bind(null, {
-          type: 'login',
+          type: 'sign in',
           onSubmit,
           handleDemo,
         })}
