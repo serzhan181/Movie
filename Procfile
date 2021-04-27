@@ -1,1 +1,1 @@
-web: node index.js
+web: cd build/ && node index.js
