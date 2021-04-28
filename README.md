@@ -25,3 +25,6 @@ In Backend (⚠️not final decision):
   - JWT tokens
 
 For data base I'm planning to use *PostgreSQL*
+
+# Contribution
+If you want to contribure to this project - you're welcome. You can fork repo and help me with the issues :)
