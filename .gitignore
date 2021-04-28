@@ -26,7 +26,6 @@ client/build/
 # TOKENS, mocks etc.
 api-about.txt
 client/src/stores/mockData.js
-client/src/api/config.js
 
 .env
 yarn.lock
