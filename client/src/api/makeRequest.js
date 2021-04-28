@@ -27,7 +27,7 @@ export const request = ({
   headers = {},
 }) => {
   const cfg = {
-    url,
+    url: 'https://moviesearchherr.herokuapp.com' + url,
     method,
     params,
     headers,
